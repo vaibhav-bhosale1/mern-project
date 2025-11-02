@@ -5,6 +5,10 @@ const GitHubStrategy = require('passport-github2').Strategy;
 const mongoose = require('mongoose');
 const User = require('../models/User');
 
+const googleCallbackURL = process.env.NODE_ENV === 'production'
+    ? 'https://mern-project-wicy.onrender.com/auth/google/callback'
+    : 'http://localhost:5000/auth/google/callback';
+
 module.exports = function (passport) {
   // =====================
   // 🔹 Google Strategy
