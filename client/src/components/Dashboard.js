@@ -23,7 +23,7 @@ const Dashboard = () => {
       // This is CRITICAL for authentication
       axios.defaults.withCredentials = true; 
 
-      const res = await axios.post('http://localhost:5000/api/search', { term }); // [cite: 19]
+      const res = await axios.post('https://mern-project-wicy.onrender.com/api/search', { term }); // [cite: 19]
       setResults(res.data.results || []); // Ensure results is always an array
       setSelectedImages([]); // Clear previous selections
     } catch (err) {
@@ -42,7 +42,7 @@ const Dashboard = () => {
     
         <div className="dashboard-header">
             <h2>Welcome, {user.displayName}</h2>
-            <a href="http://localhost:5000/auth/logout">Logout</a>
+            <a href="https://mern-project-wicy.onrender.com/auth/logout">Logout</a>
         </div>
        
 

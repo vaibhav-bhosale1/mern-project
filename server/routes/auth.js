@@ -21,10 +21,10 @@ router.get(
   '/google/callback',
   // --- FIX 2: CHECK THIS LINE ---
   // The failureRedirect MUST point to your frontend (3000), not backend (5000)
-  passport.authenticate('google', { failureRedirect: 'http://localhost:3000' }), 
+  passport.authenticate('google', { failureRedirect: 'https://mern-project-green.vercel.app' }), 
   (req, res) => {
     // Successful auth redirects to the frontend dashboard
-    res.redirect('http://localhost:3000/dashboard'); 
+    res.redirect('https://mern-project-green.vercel.app/dashboard'); 
   }
 );
 
@@ -39,15 +39,6 @@ router.get(
   passport.authenticate('facebook', { scope: ['email'] })
 );
 
-// @desc   Facebook auth callback
-// @route  GET /auth/facebook/callback
-router.get(
-  '/facebook/callback',
-  passport.authenticate('facebook', {
-    failureRedirect: 'ttp://localhost:3000/login',
-    successRedirect: '/',
-  })
-);
 
 // ==========================
 // 🔹 GitHub Authentication
@@ -62,8 +53,8 @@ router.get('/github', passport.authenticate('github', { scope: ['user:email'] })
 router.get(
   '/github/callback',
   passport.authenticate('github', {
-    failureRedirect: 'ttp://localhost:3000',
-    successRedirect: 'http://localhost:3000/dashboard',
+    failureRedirect: 'https://mern-project-green.vercel.app',
+    successRedirect: 'https://mern-project-green.vercel.app/dashboard',
   })
 );
 
@@ -101,7 +92,7 @@ router.get('/logout', (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect('http://localhost:3000'); // Redirect to login after logout
+    res.redirect('https://mern-project-green.vercel.app'); // Redirect to login after logout
   });
 });
 

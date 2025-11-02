@@ -2,7 +2,7 @@
 import React from 'react';
 
 const LoginPage = () => {
-  const backendURL = 'http://localhost:5000'; // change this to your deployed backend URL later
+  const backendURL = 'https://mern-project-wicy.onrender.com'; // change this to your deployed backend URL later
 
   return (
     <div

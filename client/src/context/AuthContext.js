@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     // Ensure cookies are sent with this request
     axios.defaults.withCredentials = true; 
     
-    axios.get('http://localhost:5000/auth/current_user')
+    axios.get('https://mern-project-wicy.onrender.com/auth/current_user')
       .then(res => {
         setUser(res.data || null); // Set user if logged in, null if not
         setLoading(false);

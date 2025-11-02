@@ -9,7 +9,7 @@ const History = () => {
     // Ensure cookies are sent with this request
     axios.defaults.withCredentials = true; 
     
-    axios.get('http://localhost:5000/api/history') // [cite: 30]
+    axios.get('https://mern-project-wicy.onrender.com/api/history') // [cite: 30]
       .then(res => {
         setHistory(res.data);
       })

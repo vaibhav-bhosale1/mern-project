@@ -15,7 +15,7 @@ const app = express();
 
 // --- Middleware ---
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow React app
+  origin: 'https://mern-project-green.vercel.app', // Allow React app
   credentials: true,
 }));
 app.use(express.json());
@@ -26,7 +26,8 @@ app.use(
       "default-src": ["'self'"], 
       "connect-src": [
         "'self'", 
-        "http://localhost:3000", 
+        "http://localhost:3000",
+        "https://mern-project-green.vercel.app/", 
         "https://api.unsplash.com" 
       ],
       "img-src": ["'self'", "data:", "images.unsplash.com"], 
