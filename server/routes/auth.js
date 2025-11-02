@@ -11,17 +11,21 @@ const router = express.Router();
 // @route  GET /auth/google
 router.get(
   '/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
+  passport.authenticate('google', { scope: ['profile'] })
 );
 
 // @desc   Google auth callback
 // @route  GET /auth/google/callback
+// @route   GET /auth/google/callback
 router.get(
   '/google/callback',
-  passport.authenticate('google', {
-    failureRedirect: '/login', // redirect if login fails
-    successRedirect: '/',      // redirect after successful login
-  })
+  // --- FIX 2: CHECK THIS LINE ---
+  // The failureRedirect MUST point to your frontend (3000), not backend (5000)
+  passport.authenticate('google', { failureRedirect: 'http://localhost:3000/login' }), 
+  (req, res) => {
+    // Successful auth redirects to the frontend dashboard
+    res.redirect('http://localhost:3000/dashboard'); 
+  }
 );
 
 // ==========================
@@ -67,6 +71,29 @@ router.get(
 // 🔹 Logout
 // ==========================
 
+
+// ==========================
+// 🔹 Get Current User
+// ==========================
+router.get('/current_user', (req, res) => {
+  if (req.user) {
+    // If user is authenticated, send user data
+    res.send(req.user); 
+  } else {
+    // If not authenticated, send null
+    res.send(null);
+  }
+});
+// @desc   Get current user info (optional route)
+// @route  GET /auth/user
+router.get('/user', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json(req.user);
+  } else {
+    res.status(401).json({ message: 'Not authenticated' });
+  }
+});
+
 // @desc   Logout user
 // @route  GET /auth/logout
 router.get('/logout', (req, res, next) => {
@@ -78,18 +105,5 @@ router.get('/logout', (req, res, next) => {
   });
 });
 
-// ==========================
-// 🔹 Get Current User
-// ==========================
-
-// @desc   Get current user info (optional route)
-// @route  GET /auth/user
-router.get('/user', (req, res) => {
-  if (req.isAuthenticated()) {
-    res.json(req.user);
-  } else {
-    res.status(401).json({ message: 'Not authenticated' });
-  }
-});
 
 module.exports = router;

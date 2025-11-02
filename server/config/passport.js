@@ -40,41 +40,7 @@ module.exports = function (passport) {
     )
   );
 
-  // =====================
-  // 🔹 Facebook Strategy
-  // =====================
-  passport.use(
-    new FacebookStrategy(
-      {
-        clientID: process.env.FACEBOOK_APP_ID,
-        clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: '/auth/facebook/callback',
-        profileFields: ['id', 'displayName', 'photos', 'email'],
-      },
-      async (accessToken, refreshToken, profile, done) => {
-        const newUser = {
-          facebookId: profile.id,
-          displayName: profile.displayName,
-          email: profile.emails?.[0]?.value || '',
-          photo: profile.photos?.[0]?.value || '',
-        };
-
-        try {
-          let user = await User.findOne({ facebookId: profile.id });
-          if (user) {
-            return done(null, user);
-          } else {
-            user = await User.create(newUser);
-            return done(null, user);
-          }
-        } catch (err) {
-          console.error('Facebook auth error:', err);
-          return done(err, null);
-        }
-      }
-    )
-  );
-
+ 
   // =====================
   // 🔹 GitHub Strategy
   // =====================
