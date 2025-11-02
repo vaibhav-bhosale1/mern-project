@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-import TopSearches from './TopSearches';
+
 import ResultsGrid from './ResultsGrid'; // Import the new component
 import History from './History'; // Import the new component
 import './Dashboard.css'; // Import the CSS
@@ -37,12 +37,14 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <TopSearches /> {/* [cite: 17] */}
       
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h2>Welcome, {user.displayName}</h2>
-        <a href="http://localhost:5000/auth/logout">Logout</a>
-      </div>
+      
+    
+        <div className="dashboard-header">
+            <h2>Welcome, {user.displayName}</h2>
+            <a href="http://localhost:5000/auth/logout">Logout</a>
+        </div>
+       
 
       <form onSubmit={handleSearch}>
         <input 

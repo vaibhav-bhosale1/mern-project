@@ -21,7 +21,7 @@ router.get(
   '/google/callback',
   // --- FIX 2: CHECK THIS LINE ---
   // The failureRedirect MUST point to your frontend (3000), not backend (5000)
-  passport.authenticate('google', { failureRedirect: 'http://localhost:3000/login' }), 
+  passport.authenticate('google', { failureRedirect: 'http://localhost:3000' }), 
   (req, res) => {
     // Successful auth redirects to the frontend dashboard
     res.redirect('http://localhost:3000/dashboard'); 
@@ -44,7 +44,7 @@ router.get(
 router.get(
   '/facebook/callback',
   passport.authenticate('facebook', {
-    failureRedirect: '/login',
+    failureRedirect: 'ttp://localhost:3000/login',
     successRedirect: '/',
   })
 );
@@ -62,8 +62,8 @@ router.get('/github', passport.authenticate('github', { scope: ['user:email'] })
 router.get(
   '/github/callback',
   passport.authenticate('github', {
-    failureRedirect: '/login',
-    successRedirect: '/',
+    failureRedirect: 'ttp://localhost:3000',
+    successRedirect: 'http://localhost:3000/dashboard',
   })
 );
 
@@ -101,7 +101,7 @@ router.get('/logout', (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect('/login'); // Redirect to login after logout
+    res.redirect('http://localhost:3000'); // Redirect to login after logout
   });
 });
 

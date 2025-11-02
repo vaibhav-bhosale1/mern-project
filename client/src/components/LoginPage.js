@@ -31,19 +31,6 @@ const LoginPage = () => {
         Continue with Google
       </a>
 
-      {/* Facebook Login */}
-      <a
-        href={`${backendURL}/auth/facebook`}
-        style={buttonStyle('#4267B2')}
-      >
-        <img
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg"
-          alt="Facebook"
-          style={iconStyle}
-        />
-        Continue with Facebook
-      </a>
-
       {/* GitHub Login */}
       <a
         href={`${backendURL}/auth/github`}
